@@ -8,8 +8,28 @@
     background-color: #C1B5AD;
   }
 
-  #map {
-    height: 100vh;
-    width: 100vw;
+  header {
+    /* flex-shrink: 12%; */
+    background-color: orange;
+    display:flex;
+    position: fixed;
+    width: 100%;
+    /* padding: 1em;
+    margin: 0 4em; */
   }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+  }
+
+  /* #map {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    /* display: flex;
+    margin-top: 12;
+    width: 100vh; */
+  } */
   

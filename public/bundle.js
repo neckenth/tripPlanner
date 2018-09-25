@@ -104,7 +104,18 @@ eval("/* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of l
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\n\nmapboxgl.accessToken = 'pk.eyJ1IjoibmVja2VudGgiLCJhIjoiY2ptaTY0a2QxMDFuMzN3bXZ1Nm53ajRwNSJ9.3AvkyUJwTfDB002CXdr-yQ';\n\nconst map = new mapboxgl.Map({\n    container: \"map\",\n    center: [-74.009, 40.705],\n    zoom: 12,\n    style: \"mapbox://styles/mapbox/streets-v10\"\n})\n\nconst mapMarker = document.createElement('mapMarker');\nmapMarker.style.width = \"32px\";\nmapMarker.style.height = \"39px\";\nmapMarker.style.backgroundImage = \"url(http://i.imgur.com/WbMOfMl.png)\";\n\n// const lngLatObj = {\n//     lng: map.center[0],\n//     lat: map.center[1]\n// }\n\nnew mapboxgl.Marker(mapMarker).setLngLat([-74.009, 40.705]).addTo(map);\n\nconsole.log('EVERYTHING IS WORKING CORRECTLY')\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\nconst markerFunc = __webpack_require__(/*! ./marker */ \"./src/marker.js\")\n\nmapboxgl.accessToken = 'pk.eyJ1IjoibmVja2VudGgiLCJhIjoiY2ptaTY0a2QxMDFuMzN3bXZ1Nm53ajRwNSJ9.3AvkyUJwTfDB002CXdr-yQ';\n\nconst map = new mapboxgl.Map({\n    container: \"map\",\n    center: [-74.009, 40.705],\n    zoom: 12,\n    style: \"mapbox://styles/mapbox/streets-v10\"\n})\n\nconst marker = markerFunc(\"activity\", [-74.009151, 40.705086]);\nmarker.addTo(map);\n\n//before copying and pasting exact coordinates array into setLngLat method, I passed map.center\n//this threw an error saying that setLngLat expected an object, not an array\n//then I created the obj below, and it failed saying that map.center[0] was undefined\n//what happened here?\n\n// const lngLatObj = {\n//     lng: map.center[0],\n//     lat: map.center[1]\n// }\n\n// new mapboxgl.Marker(mapMarker).setLngLat([-74.009, 40.705]).addTo(map);\n\nconsole.log('EVERYTHING IS WORKING CORRECTLY')\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/marker.js":
+/*!***********************!*\
+  !*** ./src/marker.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\n\nconst markerFunc = (type, coordinates) => {\n    let link;\n    if (type === 'hotel'){\n        link =  'url(http://i.imgur.com/D9574Cu.png)';\n    } else if (type === 'activity') {\n        link =  'url(http://i.imgur.com/WbMOfMl.png)';\n    } else if (type === 'restaurant') {\n        link = 'url(http://i.imgur.com/cqR6pUI.png)';\n    }\n    const mapMarker = document.createElement('mapMarker');\n    mapMarker.style.width = '32px';\n    mapMarker.style.height = '39px';\n    mapMarker.style.backgroundImage = link;\n    const result = new mapboxgl.Marker(mapMarker).setLngLat(coordinates);\n    return result;\n}\n\nmodule.exports = markerFunc;\n\n\n//# sourceURL=webpack:///./src/marker.js?");
 
 /***/ })
 

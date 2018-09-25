@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -w"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "html-template-tag": "^2.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.20.1",
+    "webpack-cli": "^3.1.1"
+  }
 }
